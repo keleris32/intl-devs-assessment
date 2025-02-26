@@ -1,0 +1,21 @@
+type Game {
+  id: ID!
+  team1: Team!
+  team2: Team!
+  moneyline1: Float
+  moneyline2: Float
+  spread1: Float
+  spread2: Float
+  totalOver: Float
+  totalUnder: Float
+  endTime: String!
+}
+
+type Team {
+  name: String!
+  logo: String!
+}
+
+type Query {
+  games: [Game!]!
+}
