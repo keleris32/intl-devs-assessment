@@ -25,6 +25,8 @@
     npm start
 ```
 
+### Ensure the Graphql API server is running FIRST before proceeding
+
 3. Install the dependencies for the mobile app running the command in the parent folder:
 
    ```bash
