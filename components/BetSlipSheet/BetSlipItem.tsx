@@ -10,6 +10,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { useBet } from "@/context/BetContext";
 import CustomText from "../CustomText";
+import { FONTS } from "@/constants/Fonts";
 
 interface BetSlipItemProps {
   selectedTeam: any;
@@ -69,8 +70,8 @@ const BetSlipItem: React.FC<BetSlipItemProps> = ({
             value={amount}
             onChangeText={handleAmountChange}
             keyboardType="numeric"
-            placeholder="Enter amount"
-            placeholderTextColor="#B0B0B0"
+            placeholder="$0"
+            placeholderTextColor="#ffffff"
           />
         </View>
       </View>
@@ -102,26 +103,27 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+    flexDirection: "column",
     paddingLeft: 10,
-    gap: 10,
   },
   matchRow: {
     flexDirection: "row",
     justifyContent: "space-between",
+    paddingTop: 10,
   },
   matchText: {
     color: "#FFFFFF",
-    fontSize: 14,
+    ...FONTS.ps2,
     fontWeight: "600",
   },
   endTime: {
     color: "#B0B0B0",
-    fontSize: 12,
+    ...FONTS.ps3,
   },
   teamRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 6,
+    marginTop: 20,
   },
   teamLogo: {
     width: 20,
@@ -130,17 +132,18 @@ const styles = StyleSheet.create({
   },
   teamText: {
     color: "#FFFFFF",
-    fontSize: 16,
+    ...FONTS.ps2,
     fontWeight: "700",
   },
   bottomRow: {
     flexDirection: "row",
+    alignItems: "flex-end",
     justifyContent: "space-between",
-    marginTop: 6,
+    paddingBottom: 15,
   },
   odds: {
     color: "#FFFFFF",
-    fontSize: 16,
+    ...FONTS.ps3,
     fontWeight: "600",
   },
   amount: {

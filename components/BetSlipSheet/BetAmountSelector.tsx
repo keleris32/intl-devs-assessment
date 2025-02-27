@@ -7,29 +7,33 @@ import {
   StyleSheet,
 } from "react-native";
 
+import { FONTS } from "@/constants/Fonts";
 import { useSwitch } from "@/context/SwitchContext";
 
 type BetAmountType = {
   betAmount: number | null;
+  customAmount: string;
   onChange: (amount: number | null) => void;
+  onChangeCustom: (amount: string) => void;
 };
 
 const BetAmountSelector: React.FC<BetAmountType> = ({
   onChange,
+  onChangeCustom,
   betAmount,
+  customAmount,
 }) => {
-  const [customAmount, setCustomAmount] = useState<string>("");
   const { isActive } = useSwitch();
 
   const predefinedAmounts = [50, 100, 200];
 
   const handleAmountPress = (amount: number) => {
     onChange(amount);
-    setCustomAmount("");
+    onChangeCustom("");
   };
 
   const handleCustomAmountChange = (text: string) => {
-    setCustomAmount(text);
+    onChangeCustom(text);
     onChange(Number(text));
   };
 
@@ -105,6 +109,7 @@ const styles = StyleSheet.create({
   },
   selectedAmount: {},
   amountText: {
+    ...FONTS.ps3,
     color: "#fff",
     fontWeight: "bold",
   },
@@ -112,6 +117,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#333",
     color: "#fff",
+    fontWeight: "bold",
     paddingVertical: 10,
     borderRadius: 6,
     textAlign: "center",
@@ -125,11 +131,11 @@ const styles = StyleSheet.create({
   },
   totalBetText: {
     color: "#aaa",
-    fontSize: 16,
+    ...FONTS.ps2,
   },
   totalBetAmount: {
     color: "#fff",
-    fontSize: 18,
+    ...FONTS.ps2,
     fontWeight: "bold",
   },
 });

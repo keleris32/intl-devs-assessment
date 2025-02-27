@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import BottomSheet from "@gorhom/bottom-sheet";
 
 import { FONTS } from "@/constants/Fonts";
@@ -16,65 +17,23 @@ import { useSwitch } from "@/context/SwitchContext";
 import { CASH_ICON, RABBI } from "@/constants/Images";
 import CustomText from "../CustomText";
 import Switch from "../Switch";
-import BetSlipItem from "./BetSlipItem";
 import AlertBanner from "./AlertBanner";
-import BetAmountSelector from "./BetAmountSelector";
 import AppButton from "../AppButton";
+import BetAmountSelector from "./BetAmountSelector";
+import ParlaySlipItems from "./ParlaySlipItems";
 
 interface IProps {
   bottomSheetRef: React.RefObject<BottomSheet>;
 }
 
-const sampleBets = [
-  {
-    id: "1",
-    team: "Warriors -3.5",
-    match: "Warriors vs Bucks",
-    odds: "-120",
-    initialAmount: "$100",
-    endTime: "8:00 PM",
-    teamLogo: "https://images3.alphacoders.com/770/770791.jpg",
-  },
-  {
-    id: "2",
-    team: "Kings Moneyline",
-    match: "Hornets vs Kings",
-    odds: "+140",
-    initialAmount: "$100",
-    endTime: "8:00 PM",
-    teamLogo:
-      "https://cdn.nba.com/teams/uploads/sites/1610612759/2023/08/logo-2.jpg?im=AspectCrop=(3,4),xPosition=0.5,yPosition=0.5;Resize=(640)",
-  },
-];
-
-const Singles: React.FC<IProps> = ({ bottomSheetRef }) => {
-  const [bets, setBets] = React.useState(sampleBets);
-  const [totalAmount, setTotalAmount] = React.useState(
-    sampleBets.reduce((sum, bet) => sum + Number(bet.initialAmount), 0)
-  );
+const Parlay: React.FC<IProps> = ({ bottomSheetRef }) => {
   const [customAmount, setCustomAmount] = React.useState<string>("");
   const [betAmount, setBetAmount] = React.useState<number | null>(null);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [showCopyOption, setShowCopyOption] = React.useState<boolean>(false);
 
-  const { selectedBets, clearBets } = useBet();
   const { isActive, toggleSwitch } = useSwitch();
-
-  const handleAmountChange = (id: string, amount: number) => {
-    setBets((prevBets) => {
-      const updatedBets = prevBets.map((bet) =>
-        bet.id === id ? { ...bet, initialAmount: String(amount) } : bet
-      );
-
-      const newTotalAmount = updatedBets.reduce(
-        (sum, bet) => sum + Number(bet.initialAmount || 0),
-        0
-      );
-
-      setTotalAmount(newTotalAmount);
-      return updatedBets;
-    });
-  };
+  const { selectedBets, clearBets } = useBet();
 
   const handleCustomAmountChange = (amount: string) => {
     setCustomAmount(amount);
@@ -146,22 +105,10 @@ const Singles: React.FC<IProps> = ({ bottomSheetRef }) => {
         </View>
       </LinearGradient>
       <View style={{ marginVertical: 15, paddingHorizontal: 15 }}>
-        {selectedBets?.map((item) => (
-          <BetSlipItem
-            key={item.game.id}
-            {...item}
-            onRemove={() =>
-              setBets((prevBets) =>
-                prevBets.filter((bet) => bet.id !== item.game.id)
-              )
-            }
-            onAmountChange={(amount) =>
-              handleAmountChange(item.game.id, amount)
-            }
-          />
-        ))}
+        {selectedBets?.length > 0 && <ParlaySlipItems />}
       </View>
       <AlertBanner message="One or more prices may have changed. Check and accept the changes for your selections." />
+
       <BetAmountSelector
         betAmount={betAmount}
         customAmount={customAmount}
@@ -254,7 +201,7 @@ const Singles: React.FC<IProps> = ({ bottomSheetRef }) => {
   );
 };
 
-export default Singles;
+export default Parlay;
 
 const styles = StyleSheet.create({
   gradientBackground: {
@@ -266,8 +213,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   image: {
-    width: 30,
-    height: 30,
+    width: wp("8"),
+    height: wp("8"),
   },
   price: {
     fontFamily: "JoyRide",

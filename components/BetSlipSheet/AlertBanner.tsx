@@ -1,6 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
+import { FONTS } from "@/constants/Fonts";
+
 const AlertBanner = ({ message }: { message: string }) => {
   return (
     <View style={styles.container}>
@@ -20,10 +22,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   text: {
-    fontFamily: "Inter",
+    ...FONTS.ps3,
     color: "#FFE100",
-    fontSize: 14,
-    lineHeight: 24,
+
     fontWeight: "600",
     textAlign: "left",
   },

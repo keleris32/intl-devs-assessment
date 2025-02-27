@@ -6,6 +6,7 @@ import { FontAwesome6 } from "@expo/vector-icons";
 
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/Colors";
+import { FONTS } from "@/constants/Fonts";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
 import { TabBarBackground } from "@/components/ui/TabBarBackground";
@@ -62,15 +63,14 @@ export default function TabLayout() {
           tabBarStyle: {
             backgroundColor: "#101216",
             position: "absolute",
-            height: 90,
-            paddingBottom: 20,
+            height: 70,
+            paddingBottom: -40,
             display: isBottomSheetOpen ? "none" : "flex",
           },
           tabBarLabelStyle: {
             paddingBottom: 0,
-            fontSize: 13,
+            ...FONTS.ps3,
             fontWeight: "600",
-            fontFamily: "Inter",
           },
           tabBarButton: (props) => <CustomTabButton {...props} />,
         }}

@@ -4,6 +4,7 @@ import { Bell, CircleUser, Wallet } from "lucide-react-native";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Colors } from "@/constants/Colors";
+import { FONTS } from "@/constants/Fonts";
 import CustomText from "./CustomText";
 
 const ScreenHeader = () => {
@@ -61,8 +62,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   screenHeader: {
-    fontFamily: "JoyRide",
-    fontSize: 32,
+    ...FONTS.h2,
     fontWeight: 400,
   },
   iconWrapper: {

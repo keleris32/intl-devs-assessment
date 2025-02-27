@@ -8,8 +8,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useLazyLoadQuery } from "react-relay";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { FONTS } from "@/constants/Fonts";
 import { Colors } from "@/constants/Colors";
 import { useBet } from "@/context/BetContext";
 import GamesQuery from "../__generated__/GamesQuery.graphql";
@@ -69,7 +71,6 @@ const GameCard: React.FC<{ game: any }> = ({ game }) => {
           {["moneyline1", "spread1", "totalOver"].map((oddType, index) => {
             const odds = game[oddType];
 
-            console.log(odds, "OKAY ODDS");
             return (
               <TouchableOpacity
                 key={index}
@@ -210,13 +211,13 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   logo: {
-    width: 32,
-    height: 60,
+    width: wp("8"),
+    height: wp("13"),
     marginRight: 8,
   },
   teamName: {
     color: "#fff",
-    fontSize: 16,
+    ...FONTS.ps2,
     flex: 1,
   },
   vs: {
@@ -238,7 +239,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   oddsText: {
-    fontSize: 16,
+    ...FONTS.ps2,
     fontWeight: "bold",
   },
   odds: {

@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import BottomSheet from "@gorhom/bottom-sheet";
 
 import { Screen } from "@/components/Screen";
@@ -20,6 +21,8 @@ import {
   FOOTBALL,
   RABBI,
 } from "@/constants/Images";
+import { useBet } from "@/context/BetContext";
+import { FONTS } from "@/constants/Fonts";
 import { useSwitch } from "@/context/SwitchContext";
 import { useBottomSheet } from "@/context/BottomSheetContext";
 import ScreenHeader from "@/components/ScreenHeader";
@@ -29,7 +32,6 @@ import SearchComponent from "@/components/SearchComponent";
 import GameList from "@/components/GameList";
 import AppButton from "@/components/AppButton";
 import BetSlipSheet from "@/components/BetSlipSheet";
-import { useBet } from "@/context/BetContext";
 
 const sportsData = [
   { id: "1", name: "NBA", icon: NBA },
@@ -159,8 +161,7 @@ export default function HomeScreen() {
               backgroundColor: "#FFE100",
             }}
             labelStyle={{
-              fontSize: 14,
-              fontFamily: "JoyRide",
+              ...FONTS.l3,
               color: "#53470C",
             }}
             onPress={() => {
@@ -170,7 +171,7 @@ export default function HomeScreen() {
         </View>
       </ScrollView>
       <BetSlipSheet
-        snapPoints={["40%"]}
+        snapPoints={["70%"]}
         bottomSheetRef={betSlipBottomSheetRef}
       />
     </Screen>
@@ -191,8 +192,7 @@ const styles = StyleSheet.create({
     height: 30,
   },
   price: {
-    fontFamily: "JoyRide",
-    fontSize: 24,
+    ...FONTS.h3,
     fontWeight: 400,
   },
   listContainer: {
@@ -205,15 +205,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   icon: {
-    width: 50,
-    height: 50,
+    width: wp("10"),
+    height: wp("10"),
     borderRadius: 25,
     backgroundColor: "#333",
     padding: 10,
   },
   categoryText: {
     color: "#FFF",
-    fontSize: 14,
+    ...FONTS.ps3,
     marginTop: 5,
   },
   indicator: {
@@ -235,12 +235,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#EC232A",
   },
   sectionTitle: {
-    fontSize: 14,
-    fontFamily: "Inter",
+    ...FONTS.ps2,
     fontWeight: 600,
   },
   seeAll: {
-    fontSize: 14,
-    fontFamily: "Inter",
+    ...FONTS.ps2,
   },
 });
